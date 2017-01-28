@@ -6,7 +6,13 @@
     <groupId>com.sfl.coolmonkey.healthy</groupId>
     <artifactId>healthy</artifactId>
     <version>0.1.0</version>
-    <packaging>jar</packaging>
+    <modules>
+        <module>api</module>
+        <module>service</module>
+        <module>domain</module>
+        <module>persistence</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <name>healthy</name>
     <description>CoolMonkey's health checker microservice</description>
@@ -24,6 +30,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <project.version>0.1.0-SNAPSHOT</project.version>
+        <start-class>com.sfl.coolmonkey.healthy.boot.HealthyApplication</start-class>
         <!--Dependencies-->
         <easymock.version>3.4</easymock.version>
         <commons-lang3.version>3.5</commons-lang3.version>
@@ -121,6 +128,31 @@
                 <groupId>org.easymock</groupId>
                 <artifactId>easymock</artifactId>
                 <version>${easymock.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sfl.coolmonkey.healthy.api</groupId>
+                <artifactId>rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sfl.coolmonkey.healthy.api</groupId>
+                <artifactId>client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sfl.coolmonkey.healthy.service</groupId>
+                <artifactId>service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sfl.coolmonkey.healthy.persistence</groupId>
+                <artifactId>persistence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sfl.coolmonkey.healthy.domain</groupId>
+                <artifactId>domain</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
