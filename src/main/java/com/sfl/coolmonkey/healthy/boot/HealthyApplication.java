@@ -1,4 +1,4 @@
-package com.sfl.coolmonkey.healthy;
+package com.sfl.coolmonkey.healthy.boot;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.sfl.coolmonkey.healthy.service.endpoint.HealthCheckEndpointService;

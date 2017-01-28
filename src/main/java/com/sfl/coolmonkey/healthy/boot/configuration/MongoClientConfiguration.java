@@ -1,4 +1,4 @@
-package com.sfl.coolmonkey.healthy.configuration;
+package com.sfl.coolmonkey.healthy.boot.configuration;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
