@@ -132,27 +132,27 @@
             <dependency>
                 <groupId>com.sfl.coolmonkey.healthy.api</groupId>
                 <artifactId>rest</artifactId>
-                <version>0.1.0</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.sfl.coolmonkey.healthy.api</groupId>
                 <artifactId>client</artifactId>
-                <version>0.1.0</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.sfl.coolmonkey.healthy.persistence</groupId>
                 <artifactId>persistence</artifactId>
-                <version>0.1.0</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.sfl.coolmonkey.healthy.core.service</groupId>
                 <artifactId>service</artifactId>
-                <version>0.1.0</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.sfl.coolmonkey.healthy.core.domain</groupId>
                 <artifactId>domain</artifactId>
-                <version>0.1.0</version>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
