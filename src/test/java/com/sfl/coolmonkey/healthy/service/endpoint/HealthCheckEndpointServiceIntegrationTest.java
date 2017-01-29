@@ -64,9 +64,9 @@ public class HealthCheckEndpointServiceIntegrationTest extends AbstractServiceIn
     @Test
     public void testGetAll() {
         // given
-        val healthCheckEndpoints = Collections.singletonList(
-                persistHealthCheckEndpoint(UUID.randomUUID().toString(), UUID.randomUUID().toString())
-        );
+        val healthCheckEndpoints = Collections.singletonList(persistHealthCheckEndpoint(
+                UUID.randomUUID().toString(), UUID.randomUUID().toString()
+        ));
         // when
         val result = healthCheckEndpointService.getAll();
         // then

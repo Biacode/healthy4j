@@ -1,9 +1,6 @@
 package com.sfl.coolmonkey.healthy.scheduler.endpoint;
 
 import com.sfl.coolmonkey.healthy.service.endpoint.HealthCheckEndpointService;
-import com.sfl.coolmonkey.notifications.api.client.rest.email.EmailResourceClient;
-import com.sfl.coolmonkey.notifications.api.model.email.EmailModel;
-import com.sfl.coolmonkey.notifications.api.model.email.request.EmailRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.core.MediaType;
-import java.util.Arrays;
 
 /**
  * User: Arthur Asatryan
@@ -36,9 +32,6 @@ public class HealthCheckEndpointJob {
     private Client jerseyClient;
 
     @Autowired
-    private EmailResourceClient emailResourceClient;
-
-    @Autowired
     private HealthCheckEndpointService healthCheckEndpointService;
     //endregion
 
@@ -58,29 +51,8 @@ public class HealthCheckEndpointJob {
                         .request(MediaType.APPLICATION_JSON_TYPE)
                         .get();
             } catch (final RuntimeException ex) {
-                performHealthCheckExceptionHandling(ex);
             }
         });
-    }
-    //endregion
-
-    //region Utility methods
-    private void performHealthCheckExceptionHandling(final RuntimeException ex) {
-        LOGGER.error("{}", ex);
-        final EmailModel emailModel = new EmailModel();
-        emailModel.setTo("arthur.asatryan@sflpro.com");
-        emailModel.setCc(Arrays.asList(
-                "email1@mailinator.com",
-                "email2@mailinator.com",
-                "email3@mailinator.com"
-        ));
-        emailModel.setFrom("healthy@callmonkey.com");
-        emailModel.setSubject("CoolMonkey - Healthy Microservice");
-        emailModel.setContent(
-                "<b>Message</b> - " + ex.getMessage() + "<br><b>Stack trace</b><br>" + Arrays.toString(ex.getStackTrace())
-        );
-        final EmailRequest request = new EmailRequest(emailModel);
-        emailResourceClient.send(request);
     }
     //endregion
 
