@@ -29,7 +29,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <project.version>0.1.0-SNAPSHOT</project.version>
-        <start-class>com.sfl.coolmonkey.healthy.boot.HealthyApplication</start-class>
         <!--Dependencies-->
         <commons-lang3.version>3.5</commons-lang3.version>
         <easymock.version>3.4</easymock.version>
@@ -141,7 +140,12 @@
             </dependency>
             <dependency>
                 <groupId>com.sfl.coolmonkey.healthy.persistence</groupId>
-                <artifactId>persistence</artifactId>
+                <artifactId>persistence-impl</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sfl.coolmonkey.healthy.persistence</groupId>
+                <artifactId>persistence-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -157,76 +161,11 @@
         </dependencies>
     </dependencyManagement>
 
-    <profiles>
-        <profile>
-            <id>docker</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.spotify</groupId>
-                        <artifactId>docker-maven-plugin</artifactId>
-                        <configuration>
-                            <registryUrl>${docker.registry.url}</registryUrl>
-                            <serverId>${docker.registry.url}</serverId>
-                            <pushImage>true</pushImage>
-                            <baseImage>java:openjdk-8-jre-alpine</baseImage>
-                            <imageName>${docker.registry.url}/healthyms</imageName>
-                            <maintainer>CoolMonkey Team</maintainer>
-                            <imageTags>
-                                <imageTag>latest</imageTag>
-                                <imageTag>${bamboo.deploy.release}</imageTag>
-                            </imageTags>
-                            <resources>
-                                <resource>
-                                    <targetPath>/opt/healthy/</targetPath>
-                                    <directory>${project.build.directory}/</directory>
-                                    <include>rest-0.1.0.jar</include>
-                                </resource>
-                                <resource>
-                                    <targetPath>/root/coolmonkey/</targetPath>
-                                    <directory>/opt/coolmonkey-docker/mount/app/healthyms/${project.environment}/
-                                    </directory>
-                                    <include>*</include>
-                                </resource>
-                                <resource>
-                                    <targetPath>/root/coolmonkey/</targetPath>
-                                    <directory>/opt/coolmonkey-docker/mount/app/common/${project.environment}/
-                                    </directory>
-                                    <include>*</include>
-                                </resource>
-                                <resource>
-                                    <targetPath>/root/coolmonkey/</targetPath>
-                                    <directory>/opt/coolmonkey-docker/tools/newrelic/</directory>
-                                    <include>newrelic.jar</include>
-                                </resource>
-                            </resources>
-                            <exposes>8080</exposes>
-                        </configuration>
-                    </plugin>
-                </plugins>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>com.spotify</groupId>
-                            <artifactId>docker-maven-plugin</artifactId>
-                            <version>${docker.maven.plugin.version}</version>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
-            </build>
-        </profile>
-    </profiles>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <executable>true</executable>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <repositories>
+        <repository>
+            <id>maven-central</id>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+    </repositories>
 
 </project>

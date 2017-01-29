@@ -12,5 +12,91 @@
 
     <artifactId>rest</artifactId>
 
+    <properties>
+        <start-class>com.sfl.coolmonkey.healthy.api.rest.HealthyApplication</start-class>
+    </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.sfl.coolmonkey.healthy.api</groupId>
+            <artifactId>client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sfl.coolmonkey.healthy.core</groupId>
+            <artifactId>service</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>healthy-rest</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>docker</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.spotify</groupId>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <configuration>
+                            <registryUrl>${docker.registry.url}</registryUrl>
+                            <serverId>${docker.registry.url}</serverId>
+                            <pushImage>true</pushImage>
+                            <baseImage>java:openjdk-8-jre-alpine</baseImage>
+                            <imageName>${docker.registry.url}/healthyms</imageName>
+                            <maintainer>CoolMonkey Team</maintainer>
+                            <imageTags>
+                                <imageTag>latest</imageTag>
+                                <imageTag>${bamboo.deploy.release}</imageTag>
+                            </imageTags>
+                            <resources>
+                                <resource>
+                                    <targetPath>/opt/healthy/</targetPath>
+                                    <directory>${project.build.directory}/</directory>
+                                    <include>healthy-rest</include>
+                                </resource>
+                                <resource>
+                                    <targetPath>/root/coolmonkey/</targetPath>
+                                    <directory>/opt/coolmonkey-docker/mount/app/healthyms/${project.environment}/
+                                    </directory>
+                                    <include>*</include>
+                                </resource>
+                                <resource>
+                                    <targetPath>/root/coolmonkey/</targetPath>
+                                    <directory>/opt/coolmonkey-docker/mount/app/common/${project.environment}/
+                                    </directory>
+                                    <include>*</include>
+                                </resource>
+                                <resource>
+                                    <targetPath>/root/coolmonkey/</targetPath>
+                                    <directory>/opt/coolmonkey-docker/tools/newrelic/</directory>
+                                    <include>newrelic.jar</include>
+                                </resource>
+                            </resources>
+                            <exposes>8080</exposes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>com.spotify</groupId>
+                            <artifactId>docker-maven-plugin</artifactId>
+                            <version>${docker.maven.plugin.version}</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
 </project>
