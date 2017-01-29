@@ -145,12 +145,12 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.sfl.coolmonkey.healthy.core.service</groupId>
+                <groupId>com.sfl.coolmonkey.healthy.core</groupId>
                 <artifactId>service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.sfl.coolmonkey.healthy.core.domain</groupId>
+                <groupId>com.sfl.coolmonkey.healthy.core</groupId>
                 <artifactId>domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
