@@ -3,12 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.sfl.coolmonkey.healthy</groupId>
-    <artifactId>healthy</artifactId>
-    <version>0.1.0</version>
-    <packaging>pom</packaging>
-    <name>healthy</name>
-    <description>CoolMonkey's health checker microservice</description>
+    <modules>
+        <module>api</module>
+        <module>core</module>
+        <module>persistence</module>
+    </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -16,6 +15,13 @@
         <version>1.4.3.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
+    <groupId>com.sfl.coolmonkey.healthy</groupId>
+    <artifactId>healthy</artifactId>
+    <version>0.1.0</version>
+    <packaging>pom</packaging>
+    <name>healthy</name>
+    <description>CoolMonkey's health checker microservice</description>
 
     <properties>
         <!--Project-->
@@ -122,6 +128,32 @@
                 <artifactId>powermock-module-junit4</artifactId>
                 <version>${powermock.version}</version>
             </dependency>
+            <!--Internal modules-->
+            <dependency>
+                <groupId>com.sfl.coolmonkey.healthy.api</groupId>
+                <artifactId>rest</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sfl.coolmonkey.healthy.api</groupId>
+                <artifactId>client</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sfl.coolmonkey.healthy.persistence</groupId>
+                <artifactId>persistence</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sfl.coolmonkey.healthy.core.service</groupId>
+                <artifactId>service</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sfl.coolmonkey.healthy.core.domain</groupId>
+                <artifactId>domain</artifactId>
+                <version>0.1.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -148,7 +180,7 @@
                                 <resource>
                                     <targetPath>/opt/healthy/</targetPath>
                                     <directory>${project.build.directory}/</directory>
-                                    <include>healthy.jar</include>
+                                    <include>rest-0.1.0.jar</include>
                                 </resource>
                                 <resource>
                                     <targetPath>/root/coolmonkey/</targetPath>
@@ -186,7 +218,6 @@
     </profiles>
 
     <build>
-        <finalName>healthy</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
