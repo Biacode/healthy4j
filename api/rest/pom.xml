@@ -63,7 +63,7 @@
                                 <resource>
                                     <targetPath>/opt/healthy/</targetPath>
                                     <directory>${project.build.directory}/</directory>
-                                    <include>healthy-rest</include>
+                                    <include>healthy-rest.jar</include>
                                 </resource>
                                 <resource>
                                     <targetPath>/root/coolmonkey/</targetPath>
