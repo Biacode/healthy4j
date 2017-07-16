@@ -1,2 +1,1 @@
-# Initial README.md
-Development has been stopped.
+# Development has been stopped.
